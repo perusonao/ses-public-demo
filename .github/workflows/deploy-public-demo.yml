@@ -37,6 +37,18 @@ jobs:
           flutter test test/game/public_demo
           flutter test test/ui/public_demo/public_demo_01_playthrough_test.dart
           flutter test test/ui/public_demo/public_demo_01_success_playthrough_test.dart
+      - name: Make standalone repository launch Public Demo at root
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('lib/main.dart')
+          text = path.read_text()
+          old = 'final experience = resolveAppExperience(Uri.base);'
+          new = 'const experience = AppExperience.publicDemo01;'
+          if old not in text:
+              raise SystemExit('Public Demo launch selector was not found')
+          path.write_text(text.replace(old, new, 1))
+          PY
       - name: Build web
         run: flutter build web --release --base-href /ses-public-demo/
       - name: Configure Pages
@@ -51,7 +63,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}#/public-demo-01
+      url: ${{ steps.deployment.outputs.page_url }}
     needs: build
     runs-on: ubuntu-latest
     steps:

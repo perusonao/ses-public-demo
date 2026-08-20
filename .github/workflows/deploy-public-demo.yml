@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: perusonao/smile_enjoy_story
-          ref: 2752a52e798624901bb7a39c0b9b33379621fd16
+          ref: c0d57d291bb0cd925d0b7ccaf7f2aeca63b375ef
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -35,6 +35,7 @@ jobs:
         run: |
           flutter analyze lib/game/public_demo lib/ui/public_demo
           flutter test test/game/public_demo
+          flutter test test/ui/public_demo/public_demo_interview_result_dialog_test.dart
           flutter test test/ui/public_demo/public_demo_01_playthrough_test.dart
           flutter test test/ui/public_demo/public_demo_01_success_playthrough_test.dart
       - name: Make standalone repository launch Public Demo at root

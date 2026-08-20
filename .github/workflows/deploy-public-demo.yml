@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: perusonao/smile_enjoy_story
-          ref: codex/public-demo-01-mvp-a
+          ref: 2752a52e798624901bb7a39c0b9b33379621fd16
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
